@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+
 const userSchema = new mongoose.Schema({
 	name: {
 		type: String,
@@ -8,6 +10,7 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 		unique: true,
+		match: [/\S+@\S+\.\S+/, "Please use a valid email address"], // Email validation
 	},
 	password: {
 		type: String,
@@ -37,6 +40,26 @@ const userSchema = new mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+});
+
+// Hash the password before saving
+userSchema.pre("save", async function (next) {
+	if (!this.isModified("password")) return next(); // Only hash if password is modified
+	try {
+		const salt = await bcrypt.genSalt(10); // Generate a salt
+		this.password = await bcrypt.hash(this.password, salt); // Hash password with salt
+		next();
+	} catch (err) {
+		next(err);
+	}
+});
+
+// Update the updatedAt field when the document is modified
+userSchema.pre("save", function (next) {
+	if (this.isModified()) {
+		this.updatedAt = Date.now();
+	}
+	next();
 });
 
 const User = mongoose.model("User", userSchema);
