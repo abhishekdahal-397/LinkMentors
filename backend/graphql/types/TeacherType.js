@@ -1,14 +1,17 @@
+// TeacherType.js
 const {
 	GraphQLObjectType,
+	GraphQLID,
 	GraphQLString,
 	GraphQLInt,
 	GraphQLList,
 } = require("graphql");
 
+// Assuming Teacher is a Mongoose model that we are going to fetch from the database.
 const TeacherType = new GraphQLObjectType({
 	name: "Teacher",
 	fields: () => ({
-		id: { type: GraphQLString },
+		id: { type: GraphQLID },
 		name: { type: GraphQLString },
 		qualification: { type: GraphQLString },
 		age: { type: GraphQLInt },
@@ -23,4 +26,5 @@ const TeacherType = new GraphQLObjectType({
 	}),
 });
 
-module.exports = TeacherType;
+// Export TeacherType
+module.exports = { TeacherType };

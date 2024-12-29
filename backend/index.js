@@ -1,5 +1,7 @@
 require("dotenv").config(); // Load environment variables
 
+console.log("MONGO_URI:", process.env.MONGO_URI); // Debugging line
+
 const express = require("express");
 const { graphqlHTTP } = require("express-graphql");
 const connectDB = require("./config/db");
@@ -20,6 +22,7 @@ app.use(
 );
 
 // Start the server
-app.listen(4000, () => {
-	console.log(`Server running on ${process.env.PORT}`);
+const port = process.env.PORT || 5000; // Use process.env.PORT or default to 4000
+app.listen(port, () => {
+	console.log(`Server running on http://localhost:${port}/graphql`);
 });

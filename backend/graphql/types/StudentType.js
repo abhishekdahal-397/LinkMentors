@@ -1,19 +1,19 @@
-import {
+const {
 	GraphQLObjectType,
 	GraphQLID,
 	GraphQLString,
 	GraphQLInt,
-} from "graphql";
-import { TeacherType } from "./TeacherType"; // Assuming a TeacherType is defined and exported
+} = require("graphql");
+const { TeacherType } = require("./TeacherType"); // Adjust path as needed
 
-export const StudentType = new GraphQLObjectType({
+module.exports.StudentType = new GraphQLObjectType({
 	name: "Student",
 	fields: () => ({
 		id: { type: GraphQLID },
 		name: { type: GraphQLString },
-		class: { type: GraphQLInt }, // Class the student is in
+		class: { type: GraphQLInt },
 		age: { type: GraphQLInt },
-		teacherReq: { type: GraphQLString }, // Requirement or preferred teacher subjects
+		teacherReq: { type: GraphQLString },
 		school: { type: GraphQLString },
 		email: { type: GraphQLString },
 		phone: { type: GraphQLInt },

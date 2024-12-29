@@ -1,10 +1,10 @@
-import {
+const {
 	GraphQLObjectType,
 	GraphQLString,
 	GraphQLInt,
 	GraphQLDate,
 	GraphQLList,
-} from "graphql";
+} = require("graphql");
 
 const UserType = new GraphQLObjectType({
 	name: "User",
