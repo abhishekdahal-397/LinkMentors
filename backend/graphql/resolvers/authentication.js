@@ -1,3 +1,4 @@
+// resolvers/authentication
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../../models/UserModel"); // Correct path to UserModel.js
